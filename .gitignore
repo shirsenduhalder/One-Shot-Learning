@@ -7,4 +7,4 @@ src/test_unseen.npy
 src/train_seen.npy
 
 src/train_unseen.npy
-models/inception
+models/inception/inception-2015-12-05.tgz
