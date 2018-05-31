@@ -1,0 +1,10 @@
+data/cub
+data/numpy_data
+src/test_seen.npy
+
+src/test_unseen.npy
+
+src/train_seen.npy
+
+src/train_unseen.npy
+models/inception
