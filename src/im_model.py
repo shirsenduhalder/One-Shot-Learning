@@ -78,9 +78,9 @@ class Model:
         self.optimizer=tf.train.AdamOptimizer(0.01).minimize(self.total_loss)
         self.init=tf.global_variables_initializer()
 
-    def train_graph(self, triplet_input, triplet_cross, triplet_labels, epochs = 1):
+    def train_graph(self, triplet_input, triplet_self, triplet_cross, triplet_labels, epochs = 1):
         total_batch = int(triplet_input.shape[0]/self.batch_size)+1
-        batches_seen1, batches_seen2, batches_seen_label = self.get_batches_seen(triplet_input, triplet_cross, triplet_labels, total_batch, self.batch_size, 'train') 
+        batches_seen1, batches_seen2, batches_seen3, batches_seen_label = self.get_batches_seen(triplet_input, triplet_self, triplet_cross, triplet_labels, total_batch, self.batch_size, 'train') 
 
         # print(batches_seen1.shape)
         # print(batches_seen2.shape)
@@ -98,8 +98,8 @@ class Model:
             
             for i in range(total_batch):
                 batch_x11 = np.array(batches_seen1[i]).astype(np.float32)
-                batch_x12 = np.array(batches_seen1[i]).astype(np.float32)
-                batch_x13 = np.array(batches_seen2[i]).astype(np.float32)
+                batch_x12 = np.array(batches_seen2[i]).astype(np.float32)
+                batch_x13 = np.array(batches_seen3[i]).astype(np.float32)
                 batch_x1_label = np.array(batches_seen_label[i]).astype(np.float32)
                 
                 _ , c, acc_new = self.session.run([self.optimizer, self.total_loss, self.acc], feed_dict = {self.X11: batch_x11, self.X12: batch_x12, self.X13: batch_x13, self.Y1: batch_x1_label})
@@ -129,7 +129,7 @@ class Model:
 
 
 
-    def get_batches_seen(self, triplet_input, triplet_cross, triplet_labels, total_batch, batch_size, name):
+    def get_batches_seen(self, triplet_input, triplet_self, triplet_cross, triplet_labels, total_batch, batch_size, name):
 
         batches1 = []
         batches2 = []
@@ -137,15 +137,18 @@ class Model:
         label = []
 
         if total_batch == 0:
-            return [triplet_input[:,:], triplet_cross[:,:], triplet_labels]
+            return [triplet_input[:,:], triplet_self[:,:], triplet_cross[:,:], triplet_labels]
         
         for i in range(total_batch):
             temp_batch = [x for x in triplet_input[i*batch_size:(i+1)*batch_size, :]]
             batches1.append(temp_batch)
 
-            temp_batch = [x for x in triplet_cross[i*batch_size:(i+1)*batch_size, :]]
+            temp_batch = [x for x in triplet_self[i*batch_size:(i+1)*batch_size, :]]
             batches2.append(temp_batch)
+
+            temp_batch = [x for x in triplet_cross[i*batch_size:(i+1)*batch_size, :]]
+            batches3.append(temp_batch)
 
             label.append(triplet_labels[i*batch_size:(i+1)*batch_size, :])
         
-        return np.array(list(batches1)), np.array(list(batches2)), np.array(list(label))
+        return np.array(list(batches1)), np.array(list(batches2)), np.array(list(batches3)), np.array(list(label))

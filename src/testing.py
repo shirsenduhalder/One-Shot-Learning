@@ -50,20 +50,20 @@ for i in range(N_INITIAL_CLASSES, TOTAL_CLASSES+1):
         LABEL_SIZE += 1
         class_type = "seen"
         train_data = club_data(train_seen[i-1:i])
-        test_data = club_test_data(test_seen[i-1:i])
+        test_data = club_test_data(test_seen[0:i])
         model = Model(sess, INPUT_SIZE, LABEL_SIZE, LATENT_SIZE, batch_size=BATCH_SIZE, weights=last_model_weights[0], biases=last_model_weights[1])
 
     else:
         LABEL_SIZE += 1
         class_type = "unseen"
         train_data = club_data(train_unseen[i-1:i])
-        test_data = club_test_data(test_unseen[i-1:i])
+        test_data = club_test_data(test_unseen[0:i])
         model = Model(sess, INPUT_SIZE, LABEL_SIZE, LATENT_SIZE, batch_size=BATCH_SIZE, weights=last_model_weights[0], biases=last_model_weights[1])
 
     train_labels = one_hot((train_data[3]), LABEL_SIZE)
     test_labels = one_hot(test_data[1], LABEL_SIZE)
 
-    weights, biases, acc, cost = model.train_graph(train_data[0], train_data[2], train_labels, epochs=5)
+    weights, biases, acc, cost = model.train_graph(train_data[0], train_data[1], train_data[2], train_labels, epochs=5)
     test_acc = model.test_model_accuracy(test_data[0], test_labels)
 
     last_model_weights = (weights, biases)

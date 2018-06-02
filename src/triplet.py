@@ -166,7 +166,7 @@ def make_triplets_seen(seen_images, mean_features_seen):
 			temp_datapoints.extend(take_random_samples(seen_images[n][:,0], 30))
 
 		inp.extend(seen_images[i][:,0])
-		out_recons.extend(seen_images[i][:,0])
+		out_recons.extend(take_random_samples(seen_images[i][:,0], seen_images[i].shape[0]))
 		out_cross.extend(take_random_samples(temp_datapoints, seen_images[i].shape[0]))
 		labels.extend(seen_images[i][:,1])
 
@@ -193,7 +193,7 @@ def make_triplets_unseen(seen_images, unseen_images, mean_features_seen, mean_fe
 				temp_datapoints.extend(take_random_samples(unseen_images[n-len(mean_features_seen)][:,0], 30))
 
 		inp.extend(unseen_images[i][:,0])
-		out_recons.extend(unseen_images[i][:,0])
+		out_recons.extend(take_random_samples(unseen_images[i][:,0], unseen_images[i].shape[0]))
 		out_cross.extend(take_random_samples(temp_datapoints, unseen_images[i].shape[0]))
 		labels.extend(unseen_images[i][:,1])
 
