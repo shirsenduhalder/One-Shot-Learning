@@ -4,12 +4,13 @@ import tensorflow as tf
 
 class Model:
 
-    def __init__(self, session, data_dim, label_dim, latent_dim, batch_size=50, weights=None, biases=None):
+    def __init__(self, session, data_dim, label_dim, latent_dim, output_file, batch_size=50, weights=None, biases=None):
         self.data_dim = data_dim
         self.latent_dim = latent_dim
         self.label_dim = label_dim
         self.session = session
         self.batch_size = batch_size
+        self.output_file = output_file
 
         self.define_placeholders()
         self.define_weights(weights, biases)
@@ -112,12 +113,12 @@ class Model:
             final_cost = avg_cost
             final_acc = avg_acc
 
-            print ("Epoch:", (epoch+1), "cost =", "{:.5f}".format(avg_cost), "accuracy =", "{:.5f}".format(avg_acc))
+            print ("Epoch:", (epoch+1), "cost =", "{:.5f}".format(avg_cost), "accuracy =", "{:.5f}".format(avg_acc), file=self.output_file)
 
             weights = self.session.run({"W11": self.W11, "W31":self.W31})
             biases = self.session.run({"bias11":self.bias11, "bias12":self.bias12, "bias13":self.bias31})
 
-        print ("Training of seen classes complete!")
+        print ("Training of seen classes complete!", file=self.output_file)
         return weights, biases, final_acc, final_cost
 
     def test_model_accuracy(self, testing_input, testing_labels):
