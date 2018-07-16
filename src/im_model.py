@@ -64,7 +64,7 @@ class Model:
         rec_seen = tf.nn.relu(tf.add(tf.matmul(latent_seen,tf.transpose(self.W11)),self.bias12), name = 'auto_seen')
         rec_cross_class = tf.nn.relu(tf.add(tf.matmul(latent_seen, tf.transpose(self.W11)), self.bias12), name = 'source_cross_seen')
 
-        logit  = tf.add(tf.matmul(latent_seen,self.W31),self.bias31, name = 'vis_class')
+        self.logit  = tf.add(tf.matmul(latent_seen,self.W31),self.bias31, name = 'vis_class')
         class_loss = tf.nn.softmax_cross_entropy_with_logits(logits = logit, labels = self.Y1)
 
         classifier_loss_t = 1000*tf.reduce_mean(class_loss) + tf.norm(self.W31) + tf.norm(self.bias31)
@@ -124,11 +124,13 @@ class Model:
     def test_model_accuracy(self, testing_input, testing_labels):
         acc_new = self.session.run([self.acc], feed_dict = {self.X11: testing_input, self.Y1: testing_labels})
         return acc_new
+        
+    def debug_values(self, testing_input, testing_labels):
+        output = self.session.run([self.logit], feed_dict = {self.X11 : testing_input})
+        return output
 
     def close_session(self):
         self.session.close()
-
-
 
     def get_batches_seen(self, triplet_input, triplet_self, triplet_cross, triplet_labels, total_batch, batch_size, name):
 

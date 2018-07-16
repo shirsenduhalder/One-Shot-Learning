@@ -50,3 +50,6 @@ def club_test_data(data):
         label.extend(x[:,1])
 
     return np.array(iin), fix_off_by_one(label)
+
+def take_random(data):
+    pass
