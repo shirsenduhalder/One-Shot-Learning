@@ -79,16 +79,12 @@ class Model:
 
         self.optimizer=tf.train.AdamOptimizer(0.01).minimize(self.total_loss)
         self.init=tf.global_variables_initializer()
+        self.session.run(self.init)
 
     def train_graph(self, triplet_input, triplet_self, triplet_cross, triplet_labels, epochs = 1):
         total_batch = int(triplet_input.shape[0]/self.batch_size)+1
         batches_seen1, batches_seen2, batches_seen3, batches_seen_label = self.get_batches_seen(triplet_input, triplet_self, triplet_cross, triplet_labels, total_batch, self.batch_size, 'train') 
 
-        # print(batches_seen1.shape)
-        # print(batches_seen2.shape)
-        # print(batches_seen_label.shape)
-
-        self.session.run(self.init)
         weights = None
         biases = None
         final_acc = 0
@@ -116,8 +112,7 @@ class Model:
 
             print ("Epoch:", (epoch+1), "cost =", "{:.5f}".format(avg_cost), "accuracy =", "{:.5f}".format(avg_acc), file=self.output_file)
 
-            weights = self.session.run({"W11": self.W11, "W31":self.W31})
-            biases = self.session.run({"bias11":self.bias11, "bias12":self.bias12, "bias13":self.bias31})
+            weights, biases = self.get_weights()
 
         print ("Training of seen classes complete!", file=self.output_file)
         return weights, biases, final_acc, final_cost
@@ -125,10 +120,11 @@ class Model:
     def test_model_accuracy(self, testing_input, testing_labels):
         acc_new = self.session.run([self.acc], feed_dict = {self.X11: testing_input, self.Y1: testing_labels})
         return acc_new
-        
-    def debug_values(self, testing_input, testing_labels):
-        output = self.session.run([self.logit], feed_dict = {self.X11 : testing_input})
-        return output
+
+    def get_weights(self):
+        weights = self.session.run({"W11": self.W11, "W31":self.W31})
+        biases = self.session.run({"bias11":self.bias11, "bias12":self.bias12, "bias13":self.bias31})
+        return weights, biases
 
     def close_session(self):
         self.session.close()
