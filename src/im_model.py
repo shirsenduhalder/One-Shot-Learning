@@ -74,7 +74,8 @@ class Model:
 
         self.total_loss = classifier_loss_t + source_loss
 
-        self.acc = tf.equal(tf.argmax(tf.nn.softmax(self.logit), 1), tf.argmax(self.Y1, 1))
+        self.output_labels = tf.argmax(tf.nn.softmax(self.logit), 1) 
+        self.acc = tf.equal(self.output_labels, tf.argmax(self.Y1, 1))
         self.acc = tf.reduce_mean(tf.cast(self.acc, tf.float32))
 
         self.optimizer=tf.train.AdamOptimizer(0.01).minimize(self.total_loss)
@@ -126,6 +127,10 @@ class Model:
         biases = self.session.run({"bias11":self.bias11, "bias12":self.bias12, "bias13":self.bias31})
         return weights, biases
 
+    def get_outputs(self, testing_input):
+        output_labels = self.session.run( [self.output_labels] , feed_dict={self.X11 : testing_input})
+        return output_labels
+        
     def close_session(self):
         self.session.close()
 
