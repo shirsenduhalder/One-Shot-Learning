@@ -1,6 +1,7 @@
 import matplotlib.pyplot as plt
 import numpy as np 
 import tensorflow as tf 
+import random
 
 def fix_off_by_one(labels):
     labels = np.array(labels)
@@ -23,6 +24,7 @@ def one_hot(labels, one_hot_size):
     b = np.zeros((a.size, one_hot_size))
     b[np.arange(a.size),a] = 1
     return b
+
 
 def club_data(data):
     iin = []
@@ -51,5 +53,34 @@ def club_test_data(data):
 
     return np.array(iin), fix_off_by_one(label)
 
-def take_random(data):
-    pass
+def catas_forg(last_data, this_data_size, ratio=1.0):
+    if last_data == []:
+        return []
+
+    new_data_indices = random.sample(range(0,last_data[0].shape[0]), this_data_size*ratio)
+
+    iin = []
+    out_self = []
+    out_recons = []
+    label = []
+
+    for x in new_data_indices:
+        iin.extend(last_data[0][x])
+        out_self.extend(last_data[1][x])
+        out_recons.extend(last_data[2][x])
+        label.extend(last_data[3][x])
+
+    return np.array(iin), np.array(out_self), np.array(out_recons), np.array(label)
+
+
+def merge_data(last_data, new_data):
+    if last_data == []:
+        return new_data
+
+    last_data[0].extend(new_data[0])
+    last_data[1].extend(new_data[1])
+    last_data[2].extend(new_data[2])
+    last_data[3].extend(new_data[3])
+
+    return last_data
+

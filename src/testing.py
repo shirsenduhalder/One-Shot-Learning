@@ -37,6 +37,8 @@ LABEL_SIZE = N_INITIAL_CLASSES
 
 
 last_model_weights = ()
+cumulative_last_data = []
+
 i = N_INITIAL_CLASSES
 
 for i in range(N_INITIAL_CLASSES, TOTAL_CLASSES+1):
@@ -68,7 +70,11 @@ for i in range(N_INITIAL_CLASSES, TOTAL_CLASSES+1):
         train_data = club_data(train_unseen[i-1-SEEN_CLASSES:i-SEEN_CLASSES])
         test_data = club_test_data(test_unseen[0:i-SEEN_CLASSES])
         model = Model(sess, INPUT_SIZE, LABEL_SIZE, LATENT_SIZE, f, batch_size=BATCH_SIZE, weights=last_model_weights[0], biases=last_model_weights[1])
-        
+    
+    catas_forget_data = catas_forg(cumulative_last_data, train_data[0].shape[0])    
+    final_train_data_for_this_class = merge_data(catas_forget_data, train_data)
+    cumulative_last_data = merge_data(cumulative_last_data, train_data)
+    
     print('LABEL_SIZE: {}'.format(LABEL_SIZE), file=f)   
     train_labels = one_hot((train_data[3]), LABEL_SIZE)
     test_labels = one_hot(test_data[1], LABEL_SIZE)
