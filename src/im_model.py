@@ -4,13 +4,16 @@ import tensorflow as tf
 
 class Model:
 
-    def __init__(self, session, data_dim, label_dim, latent_dim, output_file, batch_size=50, weights=None, biases=None):
+    def __init__(self, session, data_dim, label_dim, latent_dim, output_file, batch_size=50, weights=None, biases=None, learning_rate = 0.01, classifier_loss_weight=1000):
         self.data_dim = data_dim
         self.latent_dim = latent_dim
         self.label_dim = label_dim
         self.session = session
         self.batch_size = batch_size
         self.output_file = output_file
+
+        self.learning_rate = learning_rate
+        self.classifier_loss_weight = classifier_loss_weight
 
         self.define_placeholders()
         self.define_weights(weights, biases)
@@ -68,7 +71,7 @@ class Model:
         self.logit  = tf.add(tf.matmul(latent_seen,self.W31),self.bias31, name = 'vis_class')
         class_loss = tf.nn.softmax_cross_entropy_with_logits(logits = self.logit, labels = self.Y1)
 
-        classifier_loss_t = 1000*tf.reduce_mean(class_loss) + tf.norm(self.W31) + tf.norm(self.bias31)
+        classifier_loss_t = self.classifier_loss_weight*tf.reduce_mean(class_loss) + tf.norm(self.W31) + tf.norm(self.bias31)
 
         source_loss = tf.norm(tf.subtract(rec_seen, self.X12))  - tf.norm(tf.subtract(rec_cross_class, self.X13)) + tf.norm(self.W11) + tf.norm(self.bias11) + tf.norm(self.bias12)
 
@@ -78,7 +81,7 @@ class Model:
         self.acc = tf.equal(self.output_labels, tf.argmax(self.Y1, 1))
         self.acc = tf.reduce_mean(tf.cast(self.acc, tf.float32))
 
-        self.optimizer=tf.train.AdamOptimizer(0.01).minimize(self.total_loss)
+        self.optimizer=tf.train.AdamOptimizer(self.learning_rate).minimize(self.total_loss)
         self.init=tf.global_variables_initializer()
         self.session.run(self.init)
 
