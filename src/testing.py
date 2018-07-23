@@ -26,7 +26,7 @@ test_seen = np.load(test_seen_path)
 test_unseen = np.load(test_unseen_path)
 
 ## Define constants
-N_INITIAL_CLASSES = 5
+N_INITIAL_CLASSES = 15
 SEEN_CLASSES = train_seen.shape[0]
 UNSEEN_CLASSES = train_unseen.shape[0]
 TOTAL_CLASSES = SEEN_CLASSES + UNSEEN_CLASSES
@@ -37,6 +37,7 @@ LABEL_SIZE = N_INITIAL_CLASSES
 
 
 last_model_weights = ()
+i = N_INITIAL_CLASSES
 
 for i in range(N_INITIAL_CLASSES, TOTAL_CLASSES+1):
     #output file

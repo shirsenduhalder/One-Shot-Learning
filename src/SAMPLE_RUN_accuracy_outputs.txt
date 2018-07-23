@@ -1,0 +1,150 @@
+### STARTING NEW CYCLE 5 ###
+LABEL_SIZE: 5
+Epoch: 1 cost = 847579.95536 accuracy = 0.07589
+Epoch: 2 cost = 241918.54541 accuracy = 0.46570
+Epoch: 3 cost = 137157.27483 accuracy = 0.47110
+Epoch: 4 cost = 43433.57757 accuracy = 0.77679
+Epoch: 5 cost = 50806.03685 accuracy = 0.69643
+Training of seen classes complete!
+------ ------- Type : initial ; Accuracy at step 5 - Train 0.6964285714285714 , Test [0.7605634] with label size 5
+### END OF CYCLE 5 ###
+### STARTING NEW CYCLE 6 ###
+LABEL_SIZE: 6
+Epoch: 1 cost = 688652.81250 accuracy = 0.00000
+Epoch: 2 cost = 4286.94189 accuracy = 0.90000
+Epoch: 3 cost = 1051.32605 accuracy = 1.00000
+Epoch: 4 cost = 1047.40698 accuracy = 1.00000
+Epoch: 5 cost = 1043.48633 accuracy = 1.00000
+Training of seen classes complete!
+------ ------- Type : seen ; Accuracy at step 1 - Train 1.0 , Test [0.13414635] with label size 6
+### END OF CYCLE 6 ###
+### STARTING NEW CYCLE 7 ###
+LABEL_SIZE: 7
+Epoch: 1 cost = 1074409.87500 accuracy = 0.00000
+Epoch: 2 cost = 1837.97015 accuracy = 0.98438
+Epoch: 3 cost = 1025.48019 accuracy = 1.00000
+Epoch: 4 cost = 1017.42291 accuracy = 1.00000
+Epoch: 5 cost = 1009.51151 accuracy = 1.00000
+Training of seen classes complete!
+------ ------- Type : seen ; Accuracy at step 2 - Train 1.0 , Test [0.14583333] with label size 7
+### END OF CYCLE 7 ###
+### STARTING NEW CYCLE 8 ###
+LABEL_SIZE: 8
+Epoch: 1 cost = 1619218.56250 accuracy = 0.00000
+Epoch: 2 cost = 196055.76001 accuracy = 0.50000
+Epoch: 3 cost = 989.21091 accuracy = 1.00000
+Epoch: 4 cost = 980.43253 accuracy = 1.00000
+Epoch: 5 cost = 971.83038 accuracy = 1.00000
+Training of seen classes complete!
+------ ------- Type : seen ; Accuracy at step 3 - Train 1.0 , Test [0.11111111] with label size 8
+### END OF CYCLE 8 ###
+### STARTING NEW CYCLE 9 ###
+LABEL_SIZE: 9
+Epoch: 1 cost = 4026953.25000 accuracy = 0.00000
+Epoch: 2 cost = 2205340.56250 accuracy = 0.00000
+Epoch: 3 cost = 485348.38281 accuracy = 0.16667
+Epoch: 4 cost = 940.42291 accuracy = 1.00000
+Epoch: 5 cost = 931.58148 accuracy = 1.00000
+Training of seen classes complete!
+------ ------- Type : seen ; Accuracy at step 4 - Train 1.0 , Test [0.12195122] with label size 9
+### END OF CYCLE 9 ###
+### STARTING NEW CYCLE 10 ###
+LABEL_SIZE: 10
+Epoch: 1 cost = 2745703.75000 accuracy = 0.00000
+Epoch: 2 cost = 1073952.59375 accuracy = 0.00000
+Epoch: 3 cost = 902.07559 accuracy = 1.00000
+Epoch: 4 cost = 892.01157 accuracy = 1.00000
+Epoch: 5 cost = 882.20062 accuracy = 1.00000
+Training of seen classes complete!
+------ ------- Type : seen ; Accuracy at step 5 - Train 1.0 , Test [0.10869565] with label size 10
+### END OF CYCLE 10 ###
+### STARTING NEW CYCLE 11 ###
+LABEL_SIZE: 11
+Epoch: 1 cost = 2156153.06250 accuracy = 0.00000
+Epoch: 2 cost = 722634.18750 accuracy = 0.00000
+Epoch: 3 cost = 859.72986 accuracy = 1.00000
+Epoch: 4 cost = 850.23709 accuracy = 1.00000
+Epoch: 5 cost = 840.97699 accuracy = 1.00000
+Training of seen classes complete!
+------ ------- Type : seen ; Accuracy at step 6 - Train 1.0 , Test [0.09803922] with label size 11
+### END OF CYCLE 11 ###
+### STARTING NEW CYCLE 12 ###
+LABEL_SIZE: 12
+Epoch: 1 cost = 2107494.56250 accuracy = 0.00000
+Epoch: 2 cost = 813740.57812 accuracy = 0.00000
+Epoch: 3 cost = 5959.19791 accuracy = 0.93750
+Epoch: 4 cost = 807.55746 accuracy = 1.00000
+Epoch: 5 cost = 798.28189 accuracy = 1.00000
+Training of seen classes complete!
+------ ------- Type : seen ; Accuracy at step 7 - Train 1.0 , Test [0.08383234] with label size 12
+### END OF CYCLE 12 ###
+### STARTING NEW CYCLE 13 ###
+LABEL_SIZE: 13
+Epoch: 1 cost = 1661939.81250 accuracy = 0.00000
+Epoch: 2 cost = 463105.57031 accuracy = 0.00000
+Epoch: 3 cost = 774.77792 accuracy = 1.00000
+Epoch: 4 cost = 765.84219 accuracy = 1.00000
+Epoch: 5 cost = 757.12833 accuracy = 1.00000
+Training of seen classes complete!
+------ ------- Type : seen ; Accuracy at step 8 - Train 1.0 , Test [0.082417585] with label size 13
+### END OF CYCLE 13 ###
+### STARTING NEW CYCLE 14 ###
+LABEL_SIZE: 14
+Epoch: 1 cost = 1580985.43750 accuracy = 0.00000
+Epoch: 2 cost = 595139.89062 accuracy = 0.00000
+Epoch: 3 cost = 1043.43353 accuracy = 0.98438
+Epoch: 4 cost = 736.22430 accuracy = 1.00000
+Epoch: 5 cost = 728.37784 accuracy = 1.00000
+Training of seen classes complete!
+------ ------- Type : seen ; Accuracy at step 9 - Train 1.0 , Test [0.07614213] with label size 14
+### END OF CYCLE 14 ###
+### STARTING NEW CYCLE 15 ###
+LABEL_SIZE: 15
+Epoch: 1 cost = 1496901.56250 accuracy = 0.00000
+Epoch: 2 cost = 470937.87500 accuracy = 0.00000
+Epoch: 3 cost = 700.74197 accuracy = 1.00000
+Epoch: 4 cost = 692.84079 accuracy = 1.00000
+Epoch: 5 cost = 685.11389 accuracy = 1.00000
+Training of seen classes complete!
+------ ------- Type : unseen ; Accuracy at step 1 - Train 1.0 , Test [1.0] with label size 15
+### END OF CYCLE 15 ###
+### STARTING NEW CYCLE 16 ###
+LABEL_SIZE: 16
+Epoch: 1 cost = 2714549.37500 accuracy = 0.00000
+Epoch: 2 cost = 1686936.37500 accuracy = 0.00000
+Epoch: 3 cost = 655901.46875 accuracy = 0.00000
+Epoch: 4 cost = 4099.31842 accuracy = 0.96875
+Epoch: 5 cost = 646.82834 accuracy = 1.00000
+Training of seen classes complete!
+------ ------- Type : unseen ; Accuracy at step 2 - Train 1.0 , Test [0.5] with label size 16
+### END OF CYCLE 16 ###
+### STARTING NEW CYCLE 17 ###
+LABEL_SIZE: 17
+Epoch: 1 cost = 1981275.75000 accuracy = 0.00000
+Epoch: 2 cost = 794230.17188 accuracy = 0.00000
+Epoch: 3 cost = 6594.59943 accuracy = 0.89062
+Epoch: 4 cost = 620.62482 accuracy = 1.00000
+Epoch: 5 cost = 613.80695 accuracy = 1.00000
+Training of seen classes complete!
+------ ------- Type : unseen ; Accuracy at step 3 - Train 1.0 , Test [0.33333334] with label size 17
+### END OF CYCLE 17 ###
+### STARTING NEW CYCLE 18 ###
+LABEL_SIZE: 18
+Epoch: 1 cost = 1018891.65625 accuracy = 0.00000
+Epoch: 2 cost = 98039.33566 accuracy = 0.50000
+Epoch: 3 cost = 602.16647 accuracy = 1.00000
+Epoch: 4 cost = 595.57022 accuracy = 1.00000
+Epoch: 5 cost = 589.20718 accuracy = 1.00000
+Training of seen classes complete!
+------ ------- Type : unseen ; Accuracy at step 4 - Train 1.0 , Test [0.21052632] with label size 18
+### END OF CYCLE 18 ###
+### STARTING NEW CYCLE 19 ###
+LABEL_SIZE: 19
+Epoch: 1 cost = 1677504.50000 accuracy = 0.00000
+Epoch: 2 cost = 1173541.12500 accuracy = 0.00000
+Epoch: 3 cost = 672263.43750 accuracy = 0.00000
+Epoch: 4 cost = 176728.93750 accuracy = 0.00000
+Epoch: 5 cost = 577.33954 accuracy = 1.00000
+Training of seen classes complete!
+------ ------- Type : unseen ; Accuracy at step 5 - Train 1.0 , Test [0.01724138] with label size 19
+### END OF CYCLE 19 ###

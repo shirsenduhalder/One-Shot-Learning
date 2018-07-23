@@ -209,52 +209,24 @@ def make_triplets(seen_images, unseen_images, mean_features_seen, mean_features_
 
 def return_triplet_data():
 
-	'''
-	If data is not made before
-
-	'''
-	if not os.path.exists(triplet_data_path):
-		'''
-			Division of data according to mode
-		'''
-		##function is in data.py
-		seen_images, unseen_images = seen_unseen_partition(images_path,images_file,labels_file,mode=mode,part_type=partition_type)
-		#seen_features = get_features(seen_images[:,0])
-		#unseen_features = get_features(unseen_images[:,0])
-		#np.save(unseen_images_path,unseen_images)
-		#print('Train images dim: {}'.format(seen_images.shape))
+	seen_images, unseen_images = seen_unseen_partition(images_path,images_file,labels_file,mode=mode,part_type=partition_type)
 		
 		##division of training images in seen and unseen
-		train_images_seen,test_images_seen = train_test_partition(seen_images)
-		train_images_unseen,test_images_unseen = train_test_partition(unseen_images)
+	train_images_seen,test_images_seen = train_test_partition(seen_images)
+	train_images_unseen,test_images_unseen = train_test_partition(unseen_images)
 
-		# np.save(train_images_seen_path,train_images_seen)
-		# np.save(test_images_seen_path,test_images_seen)
-		# np.save(train_images_unseen_path,train_images_unseen)
-		# np.save(test_images_unseen_path,test_images_unseen)
+	mean_features_seen = make_features_mean(train_images_seen)
+	mean_features_unseen = make_features_mean(train_images_unseen)
+	mean_features = np.concatenate((mean_features_seen,mean_features_unseen),axis=0)
 		
-		##unique seen labels
-		#seen_labels = np.unique(train_images[:,1])
 
-		# np.save(seen_labels_path,seen_labels)
-		
-		#print('Seen images dim: {}'.format(train_images.shape))
-		#triplet_data = []
+	train_seen_triplets, train_unseen_triplets = make_triplets(train_images_seen, train_images_unseen, mean_features_seen, mean_features_unseen, mean_features)
 
-		'''
-		Loading of mean features
-		
-		'''
-		##checking if data exits
-		#if not os.path.exists(mean_features_path):
-			#making mean features
-		mean_features_seen = make_features_mean(train_images_seen)
-		mean_features_unseen = make_features_mean(train_images_unseen)
-		mean_features = np.concatenate((mean_features_seen,mean_features_unseen),axis=0)
-		#np.save(mean_features_path,mean_features)
-		#else:
-			#loading mean features
-			#mean_features = np.load(mean_features_path)
-		train_seen_triplets, train_unseen_triplets = make_triplets(train_images_seen, train_images_unseen, mean_features_seen, mean_features_unseen, mean_features)
+	np.save("train_seen.npy", train_seen_triplets)
+	np.save("train_unseen.npy", train_unseen_triplets)
+	np.save("test_seen.npy", test_images_seen)
+	np.save("test_unseen.npy", test_images_unseen)
 
 	return train_seen_triplets, train_unseen_triplets, test_images_seen, test_images_unseen
+
+_, _, _, _ = return_triplet_data()

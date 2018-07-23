@@ -112,7 +112,7 @@ def return_images(images_path,images_file,labels_file):
 	images = []
 	image_details = file_names(images_file,labels_file)
 	count = 0
-	for i in range(len(image_details[:1000])):
+	for i in range(len(image_details)):
 		#dynamic printing on terminal
 		sys.stdout.write('Loaded {}/{} images \r'.format(i,len(image_details)))
 		sys.stdout.flush()

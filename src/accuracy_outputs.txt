@@ -1,0 +1,12 @@
+### STARTING NEW CYCLE 15 ###
+LABEL_SIZE: 15
+Epoch: 1 cost = 801231.50469 accuracy = 0.02344
+Epoch: 2 cost = 330175.99106 accuracy = 0.16075
+Epoch: 3 cost = 177555.34316 accuracy = 0.26140
+Epoch: 4 cost = 112639.76794 accuracy = 0.42813
+Epoch: 5 cost = 115162.20217 accuracy = 0.47362
+Training of seen classes complete!
+------ ------- Type : initial ; Accuracy at step 15 - Train 0.4736213237047195 , Test [0.5566038] with label size 15
+### END OF CYCLE 15 ###
+### STARTING NEW CYCLE 15 ###
+LABEL_SIZE: 15

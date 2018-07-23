@@ -62,10 +62,11 @@ class Model:
         latent_seen = tf.nn.relu(tf.add(tf.matmul(self.X11,self.W11),self.bias11), name = 'latent_seen')
 
         rec_seen = tf.nn.relu(tf.add(tf.matmul(latent_seen,tf.transpose(self.W11)),self.bias12), name = 'auto_seen')
-        rec_cross_class = tf.nn.relu(tf.add(tf.matmul(latent_seen, tf.transpose(self.W11)), self.bias12), name = 'source_cross_seen')
+        rec_cross_class = tf.nn.relu(tf.add(tf.matmul(latent_seen, tf.transpose(self.W11)), self.
+            bias12), name = 'source_cross_seen')
 
         self.logit  = tf.add(tf.matmul(latent_seen,self.W31),self.bias31, name = 'vis_class')
-        class_loss = tf.nn.softmax_cross_entropy_with_logits(logits = logit, labels = self.Y1)
+        class_loss = tf.nn.softmax_cross_entropy_with_logits(logits = self.logit, labels = self.Y1)
 
         classifier_loss_t = 1000*tf.reduce_mean(class_loss) + tf.norm(self.W31) + tf.norm(self.bias31)
 
@@ -73,7 +74,7 @@ class Model:
 
         self.total_loss = classifier_loss_t + source_loss
 
-        self.acc = tf.equal(tf.argmax(tf.nn.softmax(logit), 1), tf.argmax(self.Y1, 1))
+        self.acc = tf.equal(tf.argmax(tf.nn.softmax(self.logit), 1), tf.argmax(self.Y1, 1))
         self.acc = tf.reduce_mean(tf.cast(self.acc, tf.float32))
 
         self.optimizer=tf.train.AdamOptimizer(0.01).minimize(self.total_loss)
