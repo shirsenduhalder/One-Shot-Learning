@@ -5,6 +5,7 @@ import random
 
 def fix_off_by_one(labels):
     labels = np.array(labels)
+    print(labels.shape)
     labels -= 1
     return labels
 
@@ -37,7 +38,6 @@ def club_data(data):
         out_self.extend(x[1])
         out_recons.extend(x[2])
         label.extend(x[3])
-
     return np.array(iin), np.array(out_self), np.array(out_recons), fix_off_by_one(label)
 
 def club_test_data(data):
@@ -56,31 +56,54 @@ def club_test_data(data):
 def catas_forg(last_data, this_data_size, ratio=1.0):
     if last_data == []:
         return []
-
-    new_data_indices = random.sample(range(0,last_data[0].shape[0]), this_data_size*ratio)
-
+    print(ratio*this_data_size)
+    new_data_indices = random.sample(range(0,last_data[0].shape[0]), int(this_data_size*ratio))
+    print(new_data_indices)
     iin = []
     out_self = []
     out_recons = []
     label = []
 
     for x in new_data_indices:
-        iin.extend(last_data[0][x])
-        out_self.extend(last_data[1][x])
-        out_recons.extend(last_data[2][x])
-        label.extend(last_data[3][x])
+        iin.append(last_data[0][x])
+        out_self.append(last_data[1][x])
+        out_recons.append(last_data[2][x])
+        label.append(last_data[3][x])
 
     return np.array(iin), np.array(out_self), np.array(out_recons), np.array(label)
 
 
-def merge_data(last_data, new_data):
+def merge_data(last_data, new_data, randomize=False):
     if last_data == []:
         return new_data
-
-    last_data[0].extend(new_data[0])
-    last_data[1].extend(new_data[1])
-    last_data[2].extend(new_data[2])
-    last_data[3].extend(new_data[3])
-
-    return last_data
+    if randomize:
+        iin = []
+        out_self = []
+        out_recons = []
+        label = []
+        rl = [1]*new_data[0].shape[0] + [0]*last_data[0].shape[0]
+        random.shuffle(rl)
+        i = 0
+        j = 0
+        for t in rl:
+            if t == 0:
+                iin.append(last_data[0][i])
+                out_self.append(last_data[1][i])
+                out_recons.append(last_data[2][i])
+                label.append(last_data[3][i])
+                i+=1
+            else:
+                iin.append(new_data[0][j])
+                out_self.append(new_data[1][j])
+                out_recons.append(new_data[2][j])
+                label.append(new_data[3][j])
+                j+=1
+        return np.array(iin), np.array(out_self), np.array(out_recons), np.array(label)
+    else:    
+        merged = []
+        merged.append(np.vstack((last_data[0], new_data[0])))
+        merged.append(np.vstack((last_data[1], new_data[1])))
+        merged.append(np.vstack((last_data[2], new_data[2])))
+        merged.append(np.concatenate((last_data[3], new_data[3])))
+        return merged
 
